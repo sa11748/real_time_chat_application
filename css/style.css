@@ -1,0 +1,215 @@
+:root {
+    --primary-accent: #6a5acd;  /* Slate blue instead of WhatsApp green */
+    --chat-bg: #0d1418;        /* Dark chat background */
+    --message-in: #262d31;     /* Received message color */
+    --message-out: #1e2b32;    /* Sent message color */
+    --text-primary: #e7e7e8;   /* Primary text color */
+    --text-secondary: #a6a8aa; /* Secondary text */
+    --input-bg: #1f2c33;       /* Input field background */
+    --navbar-bg: #1f2c33;      /* Navbar background */
+    --status-online: #6a5acd;  /* Online status indicator */
+    --bubble-out: #005c4b;     /* Sent bubble (darker teal) */
+    --bubble-in: #202c33;      /* Received bubble */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--chat-bg);
+    color: var(--text-primary);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    background-color: var(--navbar-bg);
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    filter: brightness(0.9) saturate(1.2);
+    width: 40px;
+    height: 40px;
+    filter: brightness(0.8);
+}
+
+h1 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0;
+    flex-grow: 1;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--status-online);
+    border-radius: 50%;
+}
+
+.chat-container {
+    flex: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px 16px 5px;
+    overflow-y: auto;
+    background-color: var(--chat-bg);
+    background-image: radial-gradient(circle at center, rgba(106,90,205,0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.welcome-message {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    padding: 20px 0;
+    margin-bottom: 10px;
+}
+
+.message {
+    max-width: 70%;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    border-radius: 7.5px;
+    line-height: 1.4;
+    word-wrap: break-word;
+    font-size: 0.95rem;
+    position: relative;
+}
+
+.left {
+    background-color: var(--bubble-in);
+    border-top-left-radius: 0;
+    float: left;
+    clear: both;
+    color: var(--text-primary);
+}
+
+.right {
+    background-color: var(--bubble-out);
+    border-top-right-radius: 0;
+    float: right;
+    clear: both;
+    color: white;
+}
+
+.message-input {
+    background-color: var(--navbar-bg);
+    padding: 10px 16px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+#send-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 8px;
+    align-items: center;
+}
+
+#messageInp {
+    flex: 1;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    outline: none;
+}
+
+#messageInp::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.8;
+}
+
+.send-btn {
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--primary-accent);
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.send-btn:hover {
+    background-color: #5d4bb1;
+    transform: scale(1.05);
+}
+
+.send-btn i {
+    font-size: 1.1rem;
+}
+
+/* Scrollbar styling */
+.chat-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+}
+
+/* Timestamp (you can add this later) */
+.message-time {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    margin-top: 2px;
+    text-align: right;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .message {
+        max-width: 80%;
+    }
+    
+    .navbar {
+        padding: 8px 12px;
+    }
+    
+    .chat-container {
+        padding: 8px 12px;
+    }
+    
+    .send-btn {
+        width: 40px;
+        height: 40px;
+    }
+}
