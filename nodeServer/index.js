@@ -1,4 +1,4 @@
-const io = require('socket.io')(8000, {
+my index.js file -> const io = require('socket.io')(8000, {
     cors: {
         origin: "*",
         methods: ["GET", "POST"],
