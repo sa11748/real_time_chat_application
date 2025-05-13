@@ -88,21 +88,12 @@
     </main>
 
     <!-- Audio elements -->
-    <audio id="messageSound" src="sounds/ting.mp3" preload="auto"></audio>
-    <audio id="reactionSound" src="sounds/pop.mp3" preload="auto"></audio>
-    <audio id="connectionSound" src="sounds/connect.mp3" preload="auto"></audio>
+    <audio id="messageSound" src="ting.mp3" preload="auto"></audio>
+    <audio id="reactionSound" src="pop.mp3" preload="auto"></audio>
+    <!-- <audio id="connectionSound" src="sounds/connect.mp3" preload="auto"></audio> -->
 
     <!-- Client script -->
     <script src="js/client.js" defer></script>
-    
-    <!-- PWA Support -->
-    <script>
-        if('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js');
-            });
-        }
-    </script>
 </body>
 
 </html>

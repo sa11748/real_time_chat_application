@@ -1,23 +1,30 @@
-my css :- make changes :- :root {
+:root {
     --primary: #6c5ce7;  /* Purple */
     --secondary: #00cec9; /* Teal */
     --user-msg: #a29bfe;  /* Light purple */
     --other-msg: #74b9ff; /* Light blue */
     --timestamp: #636e72; /* Gray */
     --error: #ff7675;     /* Soft red */
+    --chat-bg: #121212;   /* Added missing variable */
+    --navbar-bg: #1e1e1e; /* Added missing variable */
+    --text-primary: #ffffff; /* Added missing variable */
+    --text-secondary: #aaaaaa; /* Added missing variable */
+    --status-online: #00b894; /* Added missing variable */
+    --input-bg: #2d2d2d; /* Added missing variable */
+    --primary-accent: #6c5ce7; /* Added missing variable */
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Matched your HTML font */
 }
 
 body {
     background-color: var(--chat-bg);
     color: var(--text-primary);
-    height: 100vh;
+    min-height: 100vh; /* Changed from height to min-height */
     display: flex;
     flex-direction: column;
 }
@@ -25,10 +32,11 @@ body {
 .navbar {
     background-color: var(--navbar-bg);
     padding: 10px 16px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08); /* Changed to black opacity for light theme */
     position: sticky;
     top: 0;
     z-index: 100;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Added subtle shadow */
 }
 
 .nav-content {
@@ -37,18 +45,19 @@ body {
     gap: 15px;
     max-width: 1200px;
     margin: 0 auto;
+    width: 100%; /* Ensures proper width */
 }
 
 .logo {
-    filter: brightness(0.9) saturate(1.2);
     width: 40px;
     height: 40px;
-    filter: brightness(0.8);
+    filter: brightness(0.8) saturate(1.2); /* Combined filters */
+    object-fit: contain; /* Better image handling */
 }
 
 h1 {
     font-size: 1.3rem;
-    font-weight: 500;
+    font-weight: 600; /* Increased from 500 to match modern UI */
     color: var(--text-primary);
     margin: 0;
     flex-grow: 1;
@@ -58,13 +67,21 @@ h1 {
     display: flex;
     align-items: center;
     gap: 6px;
+    font-size: 0.9rem;
 }
 
 .status-dot {
-    width: 8px;
-    height: 8px;
+    width: 10px; /* Slightly larger */
+    height: 10px;
     background-color: var(--status-online);
     border-radius: 50%;
+    animation: pulse 1.5s infinite; /* Added animation */
+}
+
+.chat-app {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .chat-container {
@@ -72,11 +89,11 @@ h1 {
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
-    padding: 10px 16px 5px;
+    padding: 20px 16px;
     overflow-y: auto;
     background-color: var(--chat-bg);
-    background-image: radial-gradient(circle at center, rgba(106,90,205,0.05) 1px, transparent 1px);
-    background-size: 20px 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .welcome-message {
@@ -96,6 +113,7 @@ h1 {
     word-wrap: break-word;
     position: relative;
     animation: fadeIn 0.3s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Added subtle shadow */
 }
 
 .left {
@@ -112,34 +130,43 @@ h1 {
     border-bottom-right-radius: 4px;
 }
 
-.message-input {
+.message-input-area {
     background-color: var(--navbar-bg);
     padding: 10px 16px;
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-top: 1px solid rgba(0, 0, 0, 0.08); /* Changed to black opacity */
 }
 
-#send-container {
+.message-form {
     display: flex;
     max-width: 1200px;
     margin: 0 auto;
     gap: 8px;
     align-items: center;
+    width: 100%; /* Ensures full width */
+}
+
+.input-group {
+    display: flex;
+    flex: 1;
+    gap: 8px;
+    align-items: center;
+    position: relative; /* For emoji picker positioning */
 }
 
 #messageInp {
     flex: 1;
     padding: 12px 15px;
-    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Added subtle border */
     border-radius: 20px;
     background-color: var(--input-bg);
     color: var(--text-primary);
     font-size: 0.95rem;
     outline: none;
+    transition: border-color 0.2s;
 }
 
-#messageInp::placeholder {
-    color: var(--text-secondary);
-    opacity: 0.8;
+#messageInp:focus {
+    border-color: var(--primary); /* Highlight when focused */
 }
 
 .send-btn {
@@ -147,7 +174,7 @@ h1 {
     height: 44px;
     border: none;
     border-radius: 50%;
-    background-color: var(--primary-accent);
+    background-color: var(--primary);
     color: white;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -161,36 +188,97 @@ h1 {
     transform: scale(1.05);
 }
 
-.send-btn i {
-    font-size: 1.1rem;
+.send-btn:active {
+    transform: scale(0.98); /* Added click effect */
 }
 
 /* Scrollbar styling */
 .chat-container::-webkit-scrollbar {
-    width: 6px;
-}
-
-.chat-container::-webkit-scrollbar-track {
-    background: transparent;
+    width: 8px; /* Slightly wider */
 }
 
 .chat-container::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,0.1);
-    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.15); /* Darker thumb */
+    border-radius: 4px;
 }
 
-/* Timestamp (you can add this later) */
-.message-time {
-    font-size: 0.7rem;
-    color: var(--text-secondary);
-    margin-top: 2px;
-    text-align: right;
+.chat-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2); /* Hover state */
+}
+
+/* Typing indicator */
+.typing-indicator {
+    display: none; /* Hidden by default */
+    padding: 8px 16px;
+    margin: 4px 0;
+    align-self: flex-start;
+}
+
+.typing-bubble {
+    background: var(--other-msg);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.typing-dots {
+    display: flex;
+    gap: 3px;
+}
+
+.typing-dot {
+    width: 6px;
+    height: 6px;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: typingAnimation 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(1) { animation-delay: 0s; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* Connection toast */
+.connection-toast {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+@keyframes typingAnimation {
+    0%, 60%, 100% { opacity: 0.4; transform: translateY(0); }
+    30% { opacity: 1; transform: translateY(-3px); }
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .message {
-        max-width: 80%;
+        max-width: 85%;
     }
     
     .navbar {
@@ -205,4 +293,23 @@ h1 {
         width: 40px;
         height: 40px;
     }
+    
+    #messageInp {
+        padding: 10px 14px;
+    }
 }
+
+.reaction-bar {
+    margin-top: 5px;
+  }
+  .reaction-btn {
+    cursor: pointer;
+    margin: 0 3px;
+    font-size: 18px;
+  }
+  .reaction-display {
+    margin-top: 5px;
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+  
