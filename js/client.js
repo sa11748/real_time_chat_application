@@ -17,7 +17,6 @@ const append = (message, position, messageId = null, sender = null) => {
   const textEl = document.createElement('span');
   textEl.innerText = message;
   messageElement.appendChild(textEl);
-
   // Reaction UI
   const reactionBar = document.createElement('div');
   reactionBar.className = 'reaction-bar';
@@ -79,8 +78,9 @@ socket.on('user-joined', name => {
 
 socket.on('receive', data => {
   const msgText = `${data.name} (${data.time}): ${data.message}`;
-  const messageId = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-  append(msgText, 'left', messageId, data.name);
+  const position = data.name === name ? 'right' : 'left';
+  // const messageId = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  append(msgText, position, data.id, data.name);
 });
 
 socket.on('left', name => {
@@ -107,7 +107,6 @@ form.addEventListener('submit', e => {
   e.preventDefault();
   const message = messageInput.value.trim();
   if (message) {
-    append(`You: ${message}`, 'right');
     socket.emit('send', message);
     messageInput.value = '';
   }
