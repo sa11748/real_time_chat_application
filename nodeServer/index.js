@@ -1,3 +1,4 @@
+const port = 8000; // Falls back to 3000 if not set
 const { v4: uuidv4 } = require('uuid');
 const express = require('express');
 const app = express();
